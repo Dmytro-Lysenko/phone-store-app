@@ -15,7 +15,7 @@ const Header = () => {
       </ul>
       <ul>
         <li>
-          <Link>Add New Phone</Link>
+          <Link to="add-new-phone">Add New Phone</Link>
         </li>
       </ul>
     </nav>
