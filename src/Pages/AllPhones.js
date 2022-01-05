@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import PhoneList from "../Components/Phones/PhoneList";
+import LoadingIndicator from "../Components/UI/LoadingIndicator";
 
 const DATA = [
   {
@@ -18,8 +20,30 @@ const DATA = [
 ];
 
 const AllPhones = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(
+      "https://react-app-81b61-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setIsLoading(false);
+
+      })
+      .catch((err) => {
+        setError("Failed to fetch! Something went wrong");
+      });
+  }, []);
+
   return (
     <div>
+      <div>
+        <h1>Phone List</h1>
+        {isLoading && <LoadingIndicator />}
+      </div>
       <PhoneList phone={DATA} />
     </div>
   );

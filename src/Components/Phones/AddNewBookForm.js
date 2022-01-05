@@ -20,7 +20,6 @@ const AddNewBookForm = (props) => {
       <div>
         <label htmlFor="model">Model: </label>
         <input
-          minLength="4"
           type="text"
           id="model"
           value={enteredModel}

@@ -13,24 +13,27 @@ const AddNewPhone = () => {
     phonePrice,
     phonePhoto
   ) => {
-    const newPhone = {
-      model: phoneModel,
-      display: phoneDisplay,
-      price: phonePrice,
-      photo: phonePhoto,
-    };
-    setIsLoading(true);
-    fetch(
-      "https://react-app-81b61-default-rtdb.europe-west1.firebasedatabase.app/phones.son",
-      {
-        method: "POST",
-        body: JSON.stringify(newPhone),
-      }
-    ).catch((err) => {
-      setIsLoading(false);
-    });
-
-    setError("Failed to fetch!!! Check the address!");
+    if (phonePrice > 1400) {
+      setError("Wrong price! Max price 1400$");
+    } else {
+      const newPhone = {
+        model: phoneModel,
+        display: phoneDisplay,
+        price: phonePrice,
+        photo: phonePhoto,
+      };
+      setIsLoading(true);
+      fetch(
+        "https://react-app-81b61-default-rtdb.europe-west1.firebasedatabase.app/phones.json",
+        {
+          method: "POST",
+          body: JSON.stringify(newPhone),
+        }
+      ).then(() => {
+        setIsLoading(false);
+        setError("Failed to fetch!!! Check the address!");
+      });
+    }
   };
 
   const closeErrorModalHandler = () => {
@@ -43,12 +46,10 @@ const AddNewPhone = () => {
       <h1>Add New Book</h1>
 
       {isLoading && <LoadingIndicator />}
-      {error ? (
+      {error && (
         <ErrorModal onClose={closeErrorModalHandler}>{error}</ErrorModal>
-      ) : (
-        <AddNewBookForm OnAddPhone={addNewPhoneHandler} />
       )}
-      {/* <AddNewBookForm OnAddPhone={addNewPhoneHandler} /> */}
+      <AddNewBookForm OnAddPhone={addNewPhoneHandler} />
     </div>
   );
 };
