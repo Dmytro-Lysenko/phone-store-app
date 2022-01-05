@@ -5,6 +5,8 @@ import AddNEwPhone from "./Pages/AddNewPhone";
 import AllPhones from "./Pages/AllPhones";
 import FavoritePhones from "./Pages/FavoritePhones";
 
+
+
 function App() {
   return (
     <Fragment>
