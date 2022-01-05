@@ -11,7 +11,7 @@ const PhoneList = (props) => {
             key={phone.id}
             model={phone.model}
             display={phone.display}
-            price={phone.display}
+            price={phone.price}
             photo={phone.photo}
           />
         );
